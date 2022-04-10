@@ -88,7 +88,11 @@
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
             <!-- Replace with your content -->
             <div class="py-4" x-ref="main_content">
-              <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
+              <div class="border-2 border-dashed border-gray-200 rounded-lg h-96 p-6">
+                  <p>
+                      Happy coding!
+                  </p>
+              </div>
             </div>
             <!-- /End replace -->
           </div>
