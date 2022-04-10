@@ -2,6 +2,9 @@
 
 ## Starting the App
 
+<img width="1177" alt="laravel-shopify-app" src="https://user-images.githubusercontent.com/5115878/162614462-2c3d2a07-cfe4-44f4-9c40-a9a9d403cef3.png">
+
+
 ### Environment variables
 
 Make sure that you have a `.env` file. You can look at `.env.example` and `.env.testing` for inspiration. `.env file must contain the following environment variables
