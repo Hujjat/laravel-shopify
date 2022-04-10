@@ -25,6 +25,30 @@ use Shopify\Webhooks\Topics;
 |
 */
 
+// Custom routes
+
+Route::get('/dashboard', function (Request $request, Response $response) {
+    $shop = Utils::sanitizeShopDomain($request->query('shop'));
+
+    $appInstalled = Session::where('shop', $shop)->exists();
+    if ($appInstalled) {
+        return view('partials.dashboard', ['shop' => $shop]);
+    }else{
+        return '<h1>Please install the app first</h1>';
+    }
+});
+
+Route::get('/settings', function (Request $request, Response $response) {
+    $shop = Utils::sanitizeShopDomain($request->query('shop'));
+
+    $appInstalled = Session::where('shop', $shop)->exists();
+    if ($appInstalled) {
+        return view('partials.settings', ['shop' => $shop]);
+    }else{
+        return '<h1>Please install the app first</h1>';
+    }
+});
+
 Route::fallback(function (Request $request) {
     $shop = Utils::sanitizeShopDomain($request->query('shop'));
     $host = $request->query('host');

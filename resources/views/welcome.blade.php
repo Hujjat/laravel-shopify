@@ -4,7 +4,58 @@
 
 <div x-data="{
         openMenu: false,
-    }">
+        shop: '{{ $shop }}',
+        loading: true,
+        nav: [
+            {
+                title: 'Dashboard',
+                url: '/dashboard',
+                icon: 'dashboard',
+                active: true
+            },
+            {
+                title: 'Settings',
+                url: '/settings',
+                icon: 'settings',
+                active: false
+            }
+        ],
+        getActiveNav() {
+            return this.nav.find((nav) => nav.active == true);
+        },
+
+        fetchPage(url){
+            this.loading = true;
+            axios.get(url, {
+                params: {
+                  shop: this.shop,
+                }
+              })
+              .then( (response) => {
+                    if(response.status == 200){
+                        this.$refs['main_content'].innerHTML = response.data;
+                        let find_activeNav = this.nav.find((nav) => nav.url == url);
+                        if(find_activeNav){
+                            this.nav.forEach((nav) => {
+                                nav.active = false;
+                            });
+                            find_activeNav.active = true;
+                        }
+                    }
+              })
+              .catch( (error) => {
+                console.log(error);
+              })
+              .then( () =>{
+                this.loading = false;
+              });
+
+        }
+    }"
+    x-init="$nextTick(() => {
+        fetchPage(getActiveNav().url);
+    });"
+    >
 
     <div class="fixed inset-0 flex z-40 md:hidden"
         x-show="openMenu"
@@ -81,21 +132,8 @@
       </div>
 
       <main class="flex-1">
-        <div class="py-6">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
-          </div>
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-            <!-- Replace with your content -->
-            <div class="py-4" x-ref="main_content">
-              <div class="border-2 border-dashed border-gray-200 rounded-lg h-96 p-6">
-                  <p>
-                      Happy coding!
-                  </p>
-              </div>
-            </div>
-            <!-- /End replace -->
-          </div>
+        <div class="py-6" x-ref="main_content">
+
         </div>
       </main>
     </div>
