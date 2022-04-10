@@ -1,2 +1,6 @@
 require('./bootstrap');
-require('./react/App')
+
+
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+Alpine.start()

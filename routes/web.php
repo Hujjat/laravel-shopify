@@ -30,7 +30,7 @@ Route::fallback(function (Request $request) {
     $host = $request->query('host');
     $appInstalled = Session::where('shop', $shop)->exists();
     if ($appInstalled) {
-        return view('react', [
+        return view('welcome', [
             'shop' => $shop,
             'host' => $host,
             'apiKey' => Context::$API_KEY
